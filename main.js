@@ -1,18 +1,16 @@
+import {
+  Parser
+} from "./parser.js";
 const readline = require('readline');
 const rl = readline.createInterface(process.stdin, process.stdout);
 
-rl.setPrompt('OHAI> ');
+
+rl.setPrompt('ForEx> ');
 rl.prompt();
 
 rl.on('line', (line) => {
-  switch(line.trim()) {
-    case 'hello':
-      console.log('world!');
-      break;
-    default:
-      console.log('Say what? I might have heard `' + line.trim() + '`');
-      break;
-  }
+  let x = new Parser().read(line);
+  console.log(x);
   rl.prompt();
 }).on('close', () => {
   console.log('Have a great day!');
