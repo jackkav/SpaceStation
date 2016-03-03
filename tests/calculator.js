@@ -55,32 +55,32 @@ describe("Given a Roman Numeral", () => {
 describe("Given two Roman Numerals", () => {
   describe("When its II", () => {
     it("returns something", function() {
-      expect(new Calc().NumeralsToNumber("II")).to.not.equal("");
+      expect(new Calc().RomanToArabic("II")).to.not.equal("");
     });
   });
   describe("When its II", () => {
     it("returns 2", function() {
-      expect(new Calc().NumeralsToNumber("II")).to.equal(2);
+      expect(new Calc().RomanToArabic("II")).to.equal(2);
     });
   });
   describe("When its III", () => {
     it("returns 3", function() {
-      expect(new Calc().NumeralsToNumber("III")).to.equal(3);
+      expect(new Calc().RomanToArabic("III")).to.equal(3);
     });
   });
   describe("When its IV", () => {
     it("should subtract them and return 4", function() {
-      expect(new Calc().NumeralsToNumber("IV")).to.equal(4);
+      expect(new Calc().RomanToArabic("IV")).to.equal(4);
     });
   });
   describe("When its VI", () => {
     it("should add them together and return 6", function() {
-      expect(new Calc().NumeralsToNumber("VI")).to.equal(6);
+      expect(new Calc().RomanToArabic("VI")).to.equal(6);
     });
   });
   describe("When its XI", () => {
     it("should add them together and return 11", function() {
-      expect(new Calc().NumeralsToNumber("XI")).to.equal(11);
+      expect(new Calc().RomanToArabic("XI")).to.equal(11);
     });
   });
 });
@@ -88,12 +88,12 @@ describe("Given two Roman Numerals", () => {
 describe("Given three Roman Numerals", () => {
   describe("When its III", () => {
     it("returns 3", function() {
-      expect(new Calc().NumeralsToNumber("III")).to.equal(3);
+      expect(new Calc().RomanToArabic("III")).to.equal(3);
     });
   });
   describe("When its VII", () => {
     it("returns 7", function() {
-      expect(new Calc().NumeralsToNumber("VII")).to.equal(7);
+      expect(new Calc().RomanToArabic("VII")).to.equal(7);
     });
   });
 });

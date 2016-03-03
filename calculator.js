@@ -1,5 +1,5 @@
 export class Calc {
-  NumeralsToNumber(numeral) {
+  RomanToArabic(numeral) {
     let arabic = 0,
       i = numeral.length;
     while (i--) {

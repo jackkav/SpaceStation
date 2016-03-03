@@ -1,9 +1,10 @@
- var map = [];
+var HashMap = require("hashmap")
+var map = new HashMap();
 export class Teacher {
   addMapping(userInput) {
     let alienWord = userInput.trim().split(" ")[0],
      romanNumeral = userInput.trim().split(" ")[2];
-     map.push({alienWord,romanNumeral});
+     map.set(alienWord, romanNumeral);
      return map;
   }
   // getAlienWord(romanNumeral){
