@@ -1,4 +1,6 @@
 import Parser from "../parser.js";
+import Calc from "../calculator.js";
+import Teacher from "../teacher.js";
 import * as chai from "chai";
 import * as sinon from "sinon";
 const expect = chai.expect;
@@ -6,7 +8,7 @@ let parser;
 chai.use(require("sinon-chai"));
 describe("Given user input", () => {
   beforeEach(function() {
-      parser = new Parser();
+      parser = new Parser({teacher:new Teacher(), calc: new Calc()});
   });
   describe("When its empty", () => {
     it("returns I have no idea what you are talking about", function() {
@@ -16,6 +18,11 @@ describe("Given user input", () => {
   describe("When its hello", () => {
     it("returns I have no idea what you are talking about", () => {
       expect(parser.Read("hello")).to.equal("I have no idea what you are talking about");
+    });
+  });
+  describe("When its grob is I", () => {
+    it("returns accepted reply", () => {
+      expect(parser.Read("grob is I")).to.equal("accepted: grob is I = 1");
     });
   });
   describe("When its grob is I", () => {

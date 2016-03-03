@@ -2,7 +2,10 @@ import Calc from "./calculator.js";
 import Teacher from "./teacher.js";
 // import * as _ from "underscore"
 export default class Parser {
-
+  constructor(options){
+    this.teacher = options.teacher;
+    this.calc = options.calc;
+  }
   Read(userInput) {
 
     let containsQuestionMark = userInput.indexOf("?") !== -1;
@@ -16,8 +19,8 @@ export default class Parser {
 
     if (this.IsValidAssignment(userInput)) {
       //add translation to temp kvp
-      new Teacher().addMapping(userInput);
-      return "accepted: " + userInput + " = " + new Calc().NumeralToNumber(userInput[userInput.length - 1]);
+      this.teacher.addMapping(userInput);
+      return "accepted: " + userInput + " = " + this.calc.NumeralToNumber(userInput[userInput.length - 1]);
     }
     return "I have no idea what you are talking about";
   }
