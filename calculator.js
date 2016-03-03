@@ -1,5 +1,6 @@
 export default class Calc {
   RomanToArabic(numeral) {
+    if(!numeral)return 0;
     let arabic = 0,
       i = numeral.length;
     while (i--) {

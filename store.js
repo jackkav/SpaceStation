@@ -10,7 +10,7 @@ export default class CurrencyStore {
   getAlienWord(romanNumeral){
     return map.search(romanNumeral);
   }
-  getRomanNumberal(alienWord){
+  getRomanNumeral(alienWord){
     return map.get(alienWord);
   }
 }

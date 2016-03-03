@@ -99,3 +99,10 @@ describe("Given three Roman Numerals", () => {
     });
   });
 });
+describe("Given three Roman Numerals", () => {
+  describe("When its XLII", () => {
+    it("returns 42", function() {
+      expect(calc.RomanToArabic("XLII")).to.equal(42);
+    });
+  });
+});

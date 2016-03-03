@@ -1,18 +1,23 @@
-
 export default class Parser {
-  constructor(options){
+  constructor(options) {
     this.store = options.store;
     this.calc = options.calc;
   }
   Read(userInput) {
-
-    let containsQuestionMark = userInput.indexOf("?") !== -1;
-    //   let startsWithHowMuchIs = userInput.indexOf("how much is ") !== -1;
-    // if (containsQuestionMark && startsWithHowMuchIs) {
-    //   return "pish tegj glob glob is 42";
-    // }
-    if (containsQuestionMark) {
-      return "I have no idea what you are talking about";
+    if (this.IsValidQuestion(userInput)) {
+      let reply = this.GetQuestionUnits(userInput);
+      let numeral = "";
+      let units = reply.split(" ");
+      // return this.store.map.keys()
+      for (let i = 0; i < units.length; i++) {
+        //  console.log(this.store.map.get(units[i]))
+        // if(this.store.map.has(units[i]))
+        numeral += this.store.map.get(units[i]);
+      }
+      return numeral
+      reply += " is ";
+      reply += this.calc.RomanToArabic(numeral);
+      return reply;
     }
 
     if (this.IsValidAssignment(userInput)) {
@@ -21,6 +26,16 @@ export default class Parser {
       return "accepted: " + userInput + " = " + this.calc.NumeralToNumber(userInput[userInput.length - 1]);
     }
     return "I have no idea what you are talking about";
+  }
+  GetQuestionUnits(userInput) {
+    let questionMarkPostion = userInput.indexOf("?");
+    let query = userInput.substr(12, questionMarkPostion - 12).trim()
+    return query;
+  }
+  IsValidQuestion(userInput) {
+    let containsQuestionMark = userInput.indexOf("?") !== -1;
+    let startsWithHowMuchIs = userInput.indexOf("how much is ") !== -1;
+    return containsQuestionMark && startsWithHowMuchIs;
   }
   IsValidAssignment(userInput) {
     let containsIs = userInput.indexOf(" is ") !== -1;

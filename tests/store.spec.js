@@ -14,14 +14,14 @@ describe("Given an assignment", () => {
     it("should assign", function() {
       let input = "grob is I";
       store.addMapping(input);
-      expect(store.getRomanNumberal("grob")).to.equal("I");
+      expect(store.getRomanNumeral("grob")).to.equal("I");
     });
   });
   describe("When input is: prok is V", () => {
     it("should assign", function() {
       let input = "prok is V";
       store.addMapping(input);
-      expect(store.getRomanNumberal("prok")).to.equal("V");
+      expect(store.getRomanNumeral("prok")).to.equal("V");
     });
     it("should assign", function() {
       let input = "prok is V";
