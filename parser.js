@@ -22,7 +22,7 @@ export class Parser {
       new Teacher().addMapping(userInput);
       return "accepted: " + userInput + " = " + new Calc().NumeralToNumber(userInput[userInput.length - 1]);
     }
-    return "instructions unclear";
+    return "I have no idea what you are talking about";
   }
   IsValidAssignment(userInput) {
     let containsIs = userInput.indexOf(" is ") !== -1;

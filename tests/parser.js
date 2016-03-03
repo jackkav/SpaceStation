@@ -6,17 +6,14 @@ import * as sinon from "sinon";
 const expect = chai.expect;
 chai.use(require("sinon-chai"));
 describe("Given user input", () => {
-
-});
-describe("Given user input", () => {
   describe("When its empty", () => {
-    it("returns instructions unclear", function() {
-      expect(new Parser().Read("")).to.equal("instructions unclear");
+    it("returns I have no idea what you are talking about", function() {
+      expect(new Parser().Read("")).to.equal("I have no idea what you are talking about");
     });
   });
   describe("When its hello", () => {
-    it("returns instructions unclear", function() {
-      expect(new Parser().Read("hello")).to.equal("instructions unclear");
+    it("returns I have no idea what you are talking about", function() {
+      expect(new Parser().Read("hello")).to.equal("I have no idea what you are talking about");
     });
   });
   describe("When its grob is I", () => {
@@ -30,13 +27,13 @@ describe("Given user input", () => {
     });
   });
   describe("When its an assignment with too many words", () => {
-    it("returns instructions unclear", function() {
-      expect(new Parser().Read("the answer to life is 42")).to.equal("instructions unclear");
+    it("returns I have no idea what you are talking about", function() {
+      expect(new Parser().Read("the answer to life is 42")).to.equal("I have no idea what you are talking about");
     });
   });
   describe("When its an assignment to something which is not a roman numeral", () => {
-    it("returns instructions unclear", function() {
-      expect(new Parser().Read("life is 42")).to.equal("instructions unclear");
+    it("returns I have no idea what you are talking about", function() {
+      expect(new Parser().Read("life is 42")).to.equal("I have no idea what you are talking about");
     });
   });
   describe("When its an unknown question", () => {
