@@ -9,7 +9,7 @@ rl.setPrompt('ForEx> ');
 rl.prompt();
 
 rl.on('line', (line) => {
-  let x = new Parser().read(line);
+  let x = new Parser().Read(line);
   console.log(x);
   rl.prompt();
 }).on('close', () => {

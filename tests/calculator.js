@@ -31,17 +31,17 @@ describe("Given a Roman Numeral", () => {
     });
   });
   describe("When its C", () => {
-    it("returns 50", function() {
+    it("returns 100", function() {
       expect(new Calc().NumeralToNumber("C")).to.equal(100);
     });
   });
   describe("When its D", () => {
-    it("returns 50", function() {
+    it("returns 500", function() {
       expect(new Calc().NumeralToNumber("D")).to.equal(500);
     });
   });
   describe("When its M", () => {
-    it("returns 50", function() {
+    it("returns 1000", function() {
       expect(new Calc().NumeralToNumber("M")).to.equal(1000);
     });
   });

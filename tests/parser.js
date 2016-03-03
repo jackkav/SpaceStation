@@ -5,7 +5,9 @@ import * as chai from "chai";
 import * as sinon from "sinon";
 const expect = chai.expect;
 chai.use(require("sinon-chai"));
+describe("Given user input", () => {
 
+});
 describe("Given user input", () => {
   describe("When its empty", () => {
     it("returns instructions unclear", function() {
@@ -37,4 +39,23 @@ describe("Given user input", () => {
       expect(new Parser().Read("life is 42")).to.equal("instructions unclear");
     });
   });
+  describe("When its an unknown question", () => {
+    it("returns sorry don't know that one", function() {
+      expect(new Parser().Read("what's the answer to life?")).to.equal("I have no idea what you are talking about");
+    });
+  });
+  // describe("And some values have been assigned", () => {
+  //   describe("When its a question", () => {
+  //     describe("And the question is how much is glob ?", () => {
+  //       it("should return glob is 1", function() {
+  //         expect(new Parser().Read("how much is glob ?")).to.equal("glob is 1");
+  //       });
+  //     });
+  //     describe("And the question is how much is pish tegj glob glob ?", () => {
+  //       it("should return pish tegj glob glob is 42", function() {
+  //         expect(new Parser().Read("how much is pish tegj glob glob ?")).to.equal("pish tegj glob glob is 42");
+  //       });
+  //     });
+  //   });
+  // });
 });
