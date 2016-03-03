@@ -1,6 +1,4 @@
-import {
-  Teacher
-} from "./teacher.js";
+import Teacher from "./teacher.js";
 import * as chai from "chai";
 import * as sinon from "sinon";
 // import * as _ from "underscore";
@@ -8,7 +6,7 @@ const expect = chai.expect;
 chai.use(require("sinon-chai"));
 
 
-// 
+//
 //
 // describe("Given an assignment", () => {
 //   describe("When input is: grob is I", () => {

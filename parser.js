@@ -1,11 +1,8 @@
-import {
-  Calc
-} from "./calculator.js";
-import {
-  Teacher
-} from "./teacher.js";
+import Calc from "./calculator.js";
+import Teacher from "./teacher.js";
 // import * as _ from "underscore"
-export class Parser {
+export default class Parser {
+
   Read(userInput) {
 
     let containsQuestionMark = userInput.indexOf("?") !== -1;

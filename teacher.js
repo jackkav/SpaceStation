@@ -1,6 +1,6 @@
 var HashMap = require("hashmap")
 var map = new HashMap();
-export class Teacher {
+export default class Teacher {
   addMapping(userInput) {
     let alienWord = userInput.trim().split(" ")[0],
      romanNumeral = userInput.trim().split(" ")[2];

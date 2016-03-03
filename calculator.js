@@ -1,4 +1,4 @@
-export class Calc {
+export default class Calc {
   RomanToArabic(numeral) {
     let arabic = 0,
       i = numeral.length;
