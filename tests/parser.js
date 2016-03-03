@@ -19,12 +19,12 @@ describe("Given user input", () => {
   });
   describe("When its grob is I", () => {
     it("returns accepted reply", function() {
-      expect(new Parser().Read("grob is I")).to.equal("accepted: grob is I");
+      expect(new Parser().Read("grob is I")).to.equal("accepted: grob is I = 1");
     });
   });
   describe("When its prok is V", () => {
     it("returns accepted reply", function() {
-      expect(new Parser().Read("prok is V")).to.equal("accepted: prok is V");
+      expect(new Parser().Read("prok is V")).to.equal("accepted: prok is V = 5");
     });
   });
   describe("When its an assignment with too many words", () => {
