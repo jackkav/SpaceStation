@@ -1,9 +1,7 @@
-import Calc from "./calculator.js";
-import Teacher from "./teacher.js";
-// import * as _ from "underscore"
+
 export default class Parser {
   constructor(options){
-    this.teacher = options.teacher;
+    this.store = options.store;
     this.calc = options.calc;
   }
   Read(userInput) {
@@ -19,7 +17,7 @@ export default class Parser {
 
     if (this.IsValidAssignment(userInput)) {
       //add translation to temp kvp
-      this.teacher.addMapping(userInput);
+      this.store.addMapping(userInput);
       return "accepted: " + userInput + " = " + this.calc.NumeralToNumber(userInput[userInput.length - 1]);
     }
     return "I have no idea what you are talking about";

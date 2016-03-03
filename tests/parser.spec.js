@@ -1,6 +1,6 @@
 import Parser from "../parser.js";
 import Calc from "../calculator.js";
-import Teacher from "../teacher.js";
+import Store from "../store.js";
 import * as chai from "chai";
 import * as sinon from "sinon";
 const expect = chai.expect;
@@ -8,7 +8,7 @@ let parser;
 chai.use(require("sinon-chai"));
 describe("Given user input", () => {
   beforeEach(function() {
-      parser = new Parser({teacher:new Teacher(), calc: new Calc()});
+      parser = new Parser({store:new Store(), calc: new Calc()});
   });
   describe("When its empty", () => {
     it("returns I have no idea what you are talking about", function() {

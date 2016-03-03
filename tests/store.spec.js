@@ -1,7 +1,6 @@
-import CurrencyStore from "../teacher.js";
+import CurrencyStore from "../store.js";
 import * as chai from "chai";
 import * as sinon from "sinon";
-// // import * as _ from "underscore";
 const expect = chai.expect;
 chai.use(require("sinon-chai"));
 
