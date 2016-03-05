@@ -5,10 +5,12 @@ export default class Parser {
     this.calc = options.calc;
   }
   Read(userInput) {
-
+    //TODO: text file
+    //TODO: numeral rules
+    //TODO: credits
 
     if (this.IsValidQuestion(userInput)) {
-      let reply = this.GetQuestionUnits(userInput);
+      let reply = this.ParseQuestionUnits(userInput);
       let numeral = 0;
       let units = reply.split(" ");
       for(let i=0; i<units.length;i++){
@@ -26,7 +28,7 @@ export default class Parser {
     }
     return "I have no idea what you are talking about";
   }
-  GetQuestionUnits(userInput){
+  ParseQuestionUnits(userInput){
     let questionMarkPostion = userInput.indexOf("?");
     let query = userInput.substr(12,questionMarkPostion-12).trim()
     return query;
