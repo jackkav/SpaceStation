@@ -1,6 +1,7 @@
+import * as _ from "underscore"
 export default class Calc {
   RomanToArabic(numeral) {
-    if(!numeral)return 0;
+    if (!this.IsValidRomanNumeral(numeral)) return 0;
     let arabic = 0,
       i = numeral.length;
     while (i--) {
@@ -22,5 +23,14 @@ export default class Calc {
       M: 1000
     };
     return NUMERALS[numeral] || 0;
+  }
+  IsValidRomanNumeral(numeral) {
+    if (!numeral) return false;
+    if(numeral.indexOf("IIII")>-1)return false;
+    if(numeral.indexOf("CCCC")>-1)return false;
+    if(numeral.indexOf("MMMM")>-1)return false;
+    if(numeral.indexOf("LC")>-1)return false;
+    if(numeral.indexOf("DM")>-1)return false;
+    return true;
   }
 }

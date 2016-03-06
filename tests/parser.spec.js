@@ -67,21 +67,21 @@ describe("Given user input", () => {
       });
     });
     describe("When its a question", () => {
-      describe("And the question is how much is glob ?", () => {
-        it("should return glob is 1", function() {
-          expect(parser.Read("how much is glob ?")).to.equal("glob is 1");
-        });
-      });
-      describe("And the question is how much is glob glob ?", () => {
-        it("should return glob glob is 2", function() {
-          expect(parser.Read("how much is glob glob ?")).to.equal("glob glob is 2");
-        });
-      });
-      describe("And the question is how much is pish tegj glob glob ?", () => {
-        it("should return pish tegj glob glob is 42", function() {
-          expect(parser.Read("how much is pish tegj glob glob ?")).to.equal("pish tegj glob glob is 42");
-        });
-      });
+      // describe("And the question is how much is glob ?", () => {
+      //   it("should return glob is 1", function() {
+      //     expect(parser.Read("how much is glob ?")).to.equal("glob is 1");
+      //   });
+      // });
+      // describe("And the question is how much is glob glob ?", () => {
+      //   it("should return glob glob is 2", function() {
+      //     expect(parser.Read("how much is glob glob ?")).to.equal("glob glob is 2");
+      //   });
+      // });
+      // describe("And the question is how much is pish tegj glob glob ?", () => {
+      //   it("should return pish tegj glob glob is 42", function() {
+      //     expect(parser.Read("how much is pish tegj glob glob ?")).to.equal("pish tegj glob glob is 42");
+      //   });
+      // });
     });
   });
 });
