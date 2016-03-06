@@ -3,29 +3,32 @@ import * as chai from "chai";
 import * as sinon from "sinon";
 const expect = chai.expect;
 chai.use(require("sinon-chai"));
-
+var HashMap = require("hashmap")
 
 let store;
 describe("Given an assignment", () => {
   beforeEach(function() {
-      store = new CurrencyStore();
+      let map = new HashMap();
+
+      store = new CurrencyStore(map);
   });
   describe("When input is: grob is I", () => {
-    it("should assign", function() {
+    it("should return I", function() {
       let input = "grob is I";
-      store.addMapping(input);
-      expect(store.getRomanNumeral("grob")).to.equal("I");
+      store.addMappingToHash(input);
+
+      expect(store.getRomanNumerals("grob")).to.equal("I");
     });
   });
   describe("When input is: prok is V", () => {
-    it("should assign", function() {
+    it("should return V", function() {
       let input = "prok is V";
-      store.addMapping(input);
-      expect(store.getRomanNumeral("prok")).to.equal("V");
+      store.addMappingToHash(input);
+      expect(store.getRomanNumerals("prok")).to.equal("V");
     });
-    it("should assign", function() {
+    it("should return prok", function() {
       let input = "prok is V";
-      store.addMapping(input);
+      store.addMappingToHash(input);
       expect(store.getAlienWord("V")).to.equal("prok");
     });
   });

@@ -87,7 +87,7 @@ describe("Given glob equals I", () => {
         store: store,
         calc: calc
       });
-      sinon.stub(store, "getRomanNumeral").returns("I");
+      sinon.stub(store, "getRomanNumerals").returns("I");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob")).to.equal(1);
     });
   });
@@ -99,7 +99,7 @@ describe("Given glob equals I", () => {
         store: store,
         calc: calc
       });
-      sinon.stub(store, "getRomanNumeral").returns("II");
+      sinon.stub(store, "getRomanNumerals").returns("II");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob glob")).to.equal(2);
     });
   });

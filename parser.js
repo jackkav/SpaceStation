@@ -1,3 +1,4 @@
+import {_} from 'underscore'
 export default class Parser {
   constructor(options) {
     this.store = options.store;
@@ -5,20 +6,12 @@ export default class Parser {
   }
   Read(userInput) {
     //TODO: text file
-    //TODO: numeral rules
     //TODO: credits
 
     if (this.IsValidQuestion(userInput)) {
       let alienUnits = this.ParseQuestionUnits(userInput);
-      // let numeral = "";
-      // let units = alienUnits.split(" ");
-      // for (let i = 0; i < units.length; i++) {
-      //   numeral += this.store.map.get(units[i]);
-      // }
-      // return numeral;
       let reply = alienUnits;
       reply += " is ";
-      // reply += this.calc.RomanToArabic(numeral);
       reply += this.ConvertAlienUnitsToArabicUnits(alienUnits);
       return reply;
     }
@@ -28,14 +21,14 @@ export default class Parser {
       if (!this.calc.IsValidRomanNumeral(userInput)) {
         return "Numeral format is incorrect unable to parse";
       }
-      this.store.addMapping(userInput);
+      this.store.addMappingToHash(userInput);
       return "accepted: " + userInput + " = " + this.calc.NumeralToNumber(userInput[userInput.length - 1]);
 
     }
     return "I have no idea what you are talking about";
   }
-  ConvertAlienUnitsToArabicUnits(alienUnit){
-    var numeral = this.store.getRomanNumeral(alienUnit);
+  ConvertAlienUnitsToArabicUnits(alienUnits){
+    var numeral = this.store.getRomanNumerals(alienUnits);
     return this.calc.RomanToArabic(numeral);
   }
   ParseQuestionUnits(userInput) {
@@ -46,6 +39,8 @@ export default class Parser {
   IsValidQuestion(userInput) {
     let containsQuestionMark = userInput.indexOf("?") !== -1;
     let startsWithHowMuchIs = userInput.indexOf("how much is ") !== -1;
+
+    // let startsWithHowMuchIs = userInput.indexOf("how much is ") !== -1;
     return containsQuestionMark && startsWithHowMuchIs;
   }
   IsValidAssignment(userInput) {

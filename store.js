@@ -1,21 +1,27 @@
 var HashMap = require("hashmap")
 // var FS = require("fs")
-var map = new HashMap();
 export default class CurrencyStore {
-  addMapping(userInput) {
+  constructor(dataStore)
+  {
+    this.dataStore = dataStore||new HashMap();
+  }
+  addMappingToHash(userInput) {
     let alienWord = userInput.trim().split(" ")[0],
      romanNumeral = userInput.trim().split(" ")[2];
-     map.set(alienWord, romanNumeral);
-     return map;
+     this.dataStore.set(alienWord, romanNumeral);
+     return this.dataStore;
   }
   addMappingToFile(input){
       let alienWord = userInput.trim().split(" ")[0],
        romanNumeral = userInput.trim().split(" ")[2];
+       //does file exist?
+       //create file
+       //write data to file
   }
   getAlienWord(romanNumeral){
-    return map.search(romanNumeral);
+    return this.dataStore.search(romanNumeral);
   }
-  getRomanNumeral(alienWord){
-    return map.get(alienWord);
+  getRomanNumerals(alienWords){
+    return this.dataStore.get(alienWords);
   }
 }
