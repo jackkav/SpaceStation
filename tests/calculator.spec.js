@@ -113,6 +113,18 @@ describe('Given "X" can be subtracted from "L" and "C" only.', () => {
     });
   });
 });
+describe('Given only one small-value symbol may be subtracted from any large-value symbol.', () => {
+  describe("When its IIV", () => {
+    it("does not returns 3", function() {
+      expect(calc.RomanToArabic("IIV")).to.not.equal(3);
+    });
+  });
+  describe("When its IIX", () => {
+    it("does not return 8", function() {
+      expect(calc.RomanToArabic("IIX")).to.not.equal(8);
+    });
+  });
+});
 describe('Given "C" can be subtracted from "D" and "M" only.', () => {
   describe("When its CD", () => {
     it("returns 400", function() {

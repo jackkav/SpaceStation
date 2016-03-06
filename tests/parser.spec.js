@@ -56,32 +56,51 @@ describe("Given user input", () => {
   });
   describe("And some values have been assigned", () => {
     beforeEach(function() {
-      let store = new Store();
-      store.map = new HashMap();
-      store.map.set("grob", "I");
-      store.map.set("pish", "X");
-      store.map.set("tegl", "L");
-      parser = new Parser({
-        store: store,
-        calc: new Calc()
-      });
+
     });
     describe("When its a question", () => {
-      // describe("And the question is how much is glob ?", () => {
-      //   it("should return glob is 1", function() {
-      //     expect(parser.Read("how much is glob ?")).to.equal("glob is 1");
-      //   });
-      // });
-      // describe("And the question is how much is glob glob ?", () => {
-      //   it("should return glob glob is 2", function() {
-      //     expect(parser.Read("how much is glob glob ?")).to.equal("glob glob is 2");
-      //   });
-      // });
-      // describe("And the question is how much is pish tegj glob glob ?", () => {
-      //   it("should return pish tegj glob glob is 42", function() {
-      //     expect(parser.Read("how much is pish tegj glob glob ?")).to.equal("pish tegj glob glob is 42");
-      //   });
-      // });
+      describe("And the question is how much is glob ?", () => {
+        it("should return glob is 1", function() {
+          let store = new Store();
+          let calc = new Calc();
+          // store.map = new HashMap();
+          // store.map.set("grob", "I");
+          // store.map.set("pish", "X");
+          // store.map.set("tegl", "L");
+          parser = new Parser({
+            store: store,
+            calc: calc
+          });
+          sinon.stub(parser, "ConvertAlienUnitsToArabicUnits").returns("1");
+          expect(parser.Read("how much is glob ?")).to.equal("glob is 1");
+        });
+      });
+    });
+  });
+});
+describe("Given glob equals I", () => {
+  describe("When converting one alien unit to one roman unit", () => {
+    it("should return 1", () => {
+      let store = new Store();
+      let calc = new Calc();
+      parser = new Parser({
+        store: store,
+        calc: calc
+      });
+      sinon.stub(store, "getRomanNumeral").returns("I");
+      expect(parser.ConvertAlienUnitsToArabicUnits("glob")).to.equal(1);
+    });
+  });
+  describe("When converting two alien units to two roman units", () => {
+    it("should return 1", () => {
+      let store = new Store();
+      let calc = new Calc();
+      parser = new Parser({
+        store: store,
+        calc: calc
+      });
+      sinon.stub(store, "getRomanNumeral").returns("II");
+      expect(parser.ConvertAlienUnitsToArabicUnits("glob glob")).to.equal(2);
     });
   });
 });

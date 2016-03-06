@@ -10,15 +10,16 @@ export default class Parser {
 
     if (this.IsValidQuestion(userInput)) {
       let alienUnits = this.ParseQuestionUnits(userInput);
-      let numeral = "";
-      let units = alienUnits.split(" ");
-      for (let i = 0; i < units.length; i++) {
-        numeral += this.store.map.get(units[i]);
-      }
+      // let numeral = "";
+      // let units = alienUnits.split(" ");
+      // for (let i = 0; i < units.length; i++) {
+      //   numeral += this.store.map.get(units[i]);
+      // }
       // return numeral;
       let reply = alienUnits;
       reply += " is ";
-      reply += this.calc.RomanToArabic(numeral);
+      // reply += this.calc.RomanToArabic(numeral);
+      reply += this.ConvertAlienUnitsToArabicUnits(alienUnits);
       return reply;
     }
 
@@ -32,6 +33,10 @@ export default class Parser {
 
     }
     return "I have no idea what you are talking about";
+  }
+  ConvertAlienUnitsToArabicUnits(alienUnit){
+    var numeral = this.store.getRomanNumeral(alienUnit);
+    return this.calc.RomanToArabic(numeral);
   }
   ParseQuestionUnits(userInput) {
     let questionMarkPostion = userInput.indexOf("?");
