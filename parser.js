@@ -1,14 +1,34 @@
-import {
-  _
-} from 'underscore'
+// import {
+//   _
+// } from 'underscore'
 export default class Parser {
   constructor(options) {
     this.store = options.store;
     this.calc = options.calc;
   }
   Read(userInput) {
-    //TODO: text file
-    //TODO: credits
+    if (this.IsValidAssignment(userInput)) {
+      if (!this.calc.IsValidRomanNumeral(userInput)) {
+        return "Numeral format is incorrect unable to parse";
+      }
+      this.store.addMappingToFile(userInput);
+      return "accepted: " + userInput + " = " + this.calc.NumeralToNumber(userInput[userInput.length - 1]);
+    }
+
+    if (this.IsValidCreditAssignment(userInput)) {
+      //get materialName
+      let type = this.ParseCurrencyType(userInput);
+      // console.log(type);
+      //get arabic value
+      let everythingBeforeType = userInput.split(type)[0];
+      let totalCreditValue = userInput.split(" is ")[1].split(" ")[0];
+      let arabicCurrency = this.ConvertAlienUnitsToArabicUnits(everythingBeforeType);
+      console.log(arabicCurrency);
+      if (arabicCurrency && totalCreditValue) {
+        let creditValueOfOneInstance = totalCreditValue / arabicCurrency;
+        return "accepted: " + userInput + ", " + arabicCurrency + " " + type + " is worth " + creditValueOfOneInstance + " Credits";
+      }
+    }
 
     if (this.IsValidQuestion(userInput)) {
       let alienUnits = this.ParseQuestionUnits(userInput);
@@ -19,14 +39,6 @@ export default class Parser {
       return reply;
     }
 
-    if (this.IsValidAssignment(userInput)) {
-      if (!this.calc.IsValidRomanNumeral(userInput)) {
-        return "Numeral format is incorrect unable to parse";
-      }
-      this.store.addMappingToFile(userInput);
-      return "accepted: " + userInput + " = " + this.calc.NumeralToNumber(userInput[userInput.length - 1]);
-
-    }
     return "I have no idea what you are talking about";
   }
   AreUnitsKnown(units) {
@@ -37,13 +49,17 @@ export default class Parser {
     }
     return true;
   }
+  ParseCurrencyType(userInput) {
+    let currencyAndType = userInput.split(" is ")[0];
+    let words = currencyAndType.split(" ");
+    return words[words.length - 1];
+  }
   ConvertAlienUnitsToArabicUnits(alienUnits) {
     let numeral = "";
-    for(let unit of alienUnits.split(" "))
-    {
+    for (let unit of alienUnits.split(" ")) {
       numeral += this.store.getRomanNumeralFromFile(unit);
     }
-    // console.log(numeral);
+    console.log(numeral);
     return this.calc.RomanToArabic(numeral);
   }
   ParseQuestionUnits(userInput) {
@@ -59,9 +75,22 @@ export default class Parser {
   IsValidAssignment(userInput) {
     let containsIs = userInput.indexOf(" is ") !== -1;
     let hasThreeParts = userInput.trim().split(" ").length == 3;
-    //TODO: refactor to avoid magic string        \v/
+    //TODO: refactor to avoid magic string
     let lastPartIsNumeral = "IVXLCDM".indexOf(userInput.trim().split(" ")[2]) != -1;
     return containsIs && hasThreeParts && lastPartIsNumeral;
+  }
+  IsValidCreditAssignment(userInput) {
+    if (!userInput) return false;
+    let containsIs = userInput.indexOf(" is ") !== -1;
+    if (!containsIs) return false;
+    let containsQuestionMark = userInput.indexOf("?") !== -1;
+    if (containsQuestionMark) return false;
+    const CREDITS = "Credits";
+    let isAssigningCredits = userInput.substr(userInput.length - CREDITS.length) === CREDITS;
+    if (!isAssigningCredits) {
+      return false;
+    }
+    return true;
   }
 
 }

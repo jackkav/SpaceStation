@@ -1,7 +1,5 @@
-var HashMap = require("hashmap")
 const FILEPATH = "/tmp/test"
-var fs = require('fs');
-// var FS = require("fs")
+let fs = require('fs-extra');
 export default class CurrencyStore {
   addMappingToFile(userInput) {
     let alienWord = userInput.trim().split(" ")[0],

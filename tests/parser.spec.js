@@ -1,23 +1,24 @@
 import Parser from "../parser.js";
 import Calc from "../calculator.js";
 import Store from "../store.js";
-var HashMap = require("hashmap")
 import * as chai from "chai";
 import * as sinon from "sinon";
 const expect = chai.expect;
 let parser;
+let store;
 chai.use(require("sinon-chai"));
 describe("Given user input", () => {
 
   beforeEach(function() {
-    this.sinon = sinon.sandbox.create();
+    // this.sinon = sinon.sandbox.create();
+    store = new Store();
     parser = new Parser({
-      store: new Store(),
+      store: store,
       calc: new Calc()
     });
   });
   afterEach(function() {
-    this.sinon.restore();
+    // this.sinon.restore();
   });
   describe("When its empty", () => {
     it("returns I have no idea what you are talking about", function() {
@@ -66,12 +67,12 @@ describe("Given user input", () => {
     describe("When its a question", () => {
       describe("And the question is how much is glob ?", () => {
         it("should return glob is 1", function() {
-          let store = new Store();
-          let calc = new Calc();
-          parser = new Parser({
-            store: store,
-            calc: calc
-          });
+          // let store = new Store();
+          // let calc = new Calc();
+          // parser = new Parser({
+          //   store: store,
+          //   calc: calc
+          // });
           sinon.stub(parser, "ConvertAlienUnitsToArabicUnits").returns("1");
           expect(parser.Read("how much is glob ?")).to.equal("glob is 1");
         });
@@ -79,22 +80,22 @@ describe("Given user input", () => {
     });
   });
 });
+
+
 describe("Given glob equals I", () => {
   beforeEach(function() {
-    this.sinon = sinon.sandbox.create();
+    // this.sinon = sinon.sandbox.create();
+    store = new Store()
+    parser = new Parser({
+      store: store,
+      calc: new Calc()
+    });
   });
-
   afterEach(function() {
-    this.sinon.restore();
+    // this.sinon.restore();
   });
   describe("When converting one alien unit to one roman unit", () => {
     it("should return 1", () => {
-      let store = new Store();
-      let calc = new Calc();
-      parser = new Parser({
-        store: store,
-        calc: calc
-      });
       sinon.stub(store, "getRomanNumeralFromFile").returns("I");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob")).to.equal(1);
     });
@@ -102,12 +103,12 @@ describe("Given glob equals I", () => {
   });
   describe("When converting two alien units to two roman units", () => {
     it("should return 2", () => {
-      let store = new Store();
-      let calc = new Calc();
-      parser = new Parser({
-        store: store,
-        calc: calc
-      });
+      // let store = new Store();
+      // let calc = new Calc();
+      // parser = new Parser({
+      //   store: store,
+      //   calc: calc
+      // });
       sinon.stub(store, "getRomanNumeralFromFile").returns("I");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob glob")).to.equal(2);
     });
@@ -165,6 +166,15 @@ describe("Given known units", () => {
       });
       sinon.stub(store, "getRomanNumeralFromFile").returns("X");
       expect(parser.AreUnitsKnown("pish tegj glob glob?")).to.equal(true);
+    });
+  });
+});
+
+describe("Given known units", () => {
+  describe("When assignment is glob glob Silver is 34 Credits", () => {
+    it("should accept glob glob Silver is 34 Credits", () => {
+      sinon.stub(parser, "ConvertAlienUnitsToArabicUnits").returns("2");
+      expect(parser.Read("glob glob Silver is 34 Credits")).to.equal("accepted: glob glob Silver is 34 Credits, 2 Silver is worth 17 Credits");
     });
   });
 });
