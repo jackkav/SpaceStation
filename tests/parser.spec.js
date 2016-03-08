@@ -177,4 +177,14 @@ describe("Given known units", () => {
       expect(parser.Read("glob glob Silver is 34 Credits")).to.equal("accepted: glob glob Silver is 34 Credits, 2 Silver is worth 17 Credits");
     });
   });
+  describe("When question is how many Credits is glob prok Silver ?", () => {
+    it("should return glob prok Silver is 68 Credits", () => {
+      expect(parser.Read("how many Credits is glob prok Silver ?")).to.equal("glob prok Silver is 68 Credits");
+    });
+  });
+  describe("When question is how many Credits is glob glob glob Silver ?", () => {
+    it("should return glob glob glob Silver is 51 Credits", () => {
+      expect(parser.Read("how many Credits is glob glob glob Silver ?")).to.equal("glob glob glob Silver is 51 Credits");
+    });
+  });
 });

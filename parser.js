@@ -23,9 +23,10 @@ export default class Parser {
       let everythingBeforeType = userInput.split(type)[0];
       let totalCreditValue = userInput.split(" is ")[1].split(" ")[0];
       let arabicCurrency = this.ConvertAlienUnitsToArabicUnits(everythingBeforeType);
-      console.log(arabicCurrency);
+      // console.log(arabicCurrency);
       if (arabicCurrency && totalCreditValue) {
         let creditValueOfOneInstance = totalCreditValue / arabicCurrency;
+        this.store.SetExchangeRate(type,creditValueOfOneInstance);
         return "accepted: " + userInput + ", " + arabicCurrency + " " + type + " is worth " + creditValueOfOneInstance + " Credits";
       }
     }
@@ -37,6 +38,21 @@ export default class Parser {
       reply += " is ";
       reply += this.ConvertAlienUnitsToArabicUnits(alienUnits);
       return reply;
+    }
+    if (this.IsValidCreditQuestion(userInput)) {
+      let currencyAndType = userInput.split(" is ")[1].split("?")[0].trim();
+      let words = currencyAndType.split(" ");
+      let type = words[words.length - 1];
+      let everythingBeforeType = currencyAndType.split(type)[0];
+      let reply = currencyAndType + " is ";
+      //get arabicCurrency
+      let arabic = this.ConvertAlienUnitsToArabicUnits(everythingBeforeType);
+      console.log(arabic)
+        //get exchangeRate
+      let exchangeRate = this.store.GetExchangeRate(type);
+      console.log(exchangeRate)
+      reply += arabic * exchangeRate;
+      return reply + " Credits";
     }
 
     return "I have no idea what you are talking about";
@@ -59,7 +75,7 @@ export default class Parser {
     for (let unit of alienUnits.split(" ")) {
       numeral += this.store.getRomanNumeralFromFile(unit);
     }
-    console.log(numeral);
+    // console.log(numeral);
     return this.calc.RomanToArabic(numeral);
   }
   ParseQuestionUnits(userInput) {
@@ -71,6 +87,11 @@ export default class Parser {
     let containsQuestionMark = userInput.indexOf("?") !== -1;
     let startsWithHowMuchIs = userInput.indexOf("how much is ") !== -1;
     return containsQuestionMark && startsWithHowMuchIs;
+  }
+  IsValidCreditQuestion(userInput) {
+    let containsQuestionMark = userInput.indexOf("?") !== -1;
+    let startsWithHowManyCreditsIs = userInput.indexOf("how many Credits is ") !== -1;
+    return containsQuestionMark && startsWithHowManyCreditsIs;
   }
   IsValidAssignment(userInput) {
     let containsIs = userInput.indexOf(" is ") !== -1;
