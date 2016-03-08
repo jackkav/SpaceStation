@@ -41,8 +41,9 @@ export default class Parser {
     let numeral = "";
     for(let unit of alienUnits.split(" "))
     {
-      numeral += this.store.getRomanNumeralFromFile(alienUnits);
+      numeral += this.store.getRomanNumeralFromFile(unit);
     }
+    // console.log(numeral);
     return this.calc.RomanToArabic(numeral);
   }
   ParseQuestionUnits(userInput) {

@@ -7,32 +7,33 @@ var HashMap = require("hashmap")
 var fs = require('fs');
 
 let store;
-describe("Given a store with data", () => {
-  it("should return I", function() {
-    let s = new CurrencyStore()
-    s.addMappingToFile("grob is I");
-    s.addMappingToFile("prok is V");
-    s.addMappingToFile("prok is V");
-    s.addMappingToFile("pish is X");
-    var result = fs.readFileSync("/tmp/test");
-    expect(result.toString()).to.equal("grob:I,prok:V,pish:X,");
-  });
-});
-describe("Given a store with data", () => {
-  it("should return I", function() {
-    let s = new CurrencyStore()
-    expect(s.getRomanNumeralFromFile("prok")).to.equal("V");
-  });
-});
 // describe("Given a store with data", () => {
-//   describe("When input is: grob is I", () => {
+//   it("should return I", function() {
+//     let s = new CurrencyStore()
+//     s.addMappingToFile("glob is I");
+//     s.addMappingToFile("prok is V");
+//     s.addMappingToFile("prok is V");
+//     s.addMappingToFile("bob is V");
+//     s.addMappingToFile("pish is X");
+//     var result = fs.readFileSync("/tmp/test");
+//     expect(result.toString()).to.equal("glob:I,prok:V,pish:X,");
+//   });
+// });
+// describe("Given a store with data", () => {
+//   it("should return I", function() {
+//     let s = new CurrencyStore()
+//     expect(s.getRomanNumeralFromFile("prok")).to.equal("V");
+//   });
+// });
+// describe("Given a store with data", () => {
+//   describe("When input is: glob is I", () => {
 //     it("should return I", function() {
-//       let input = "grob is I";
+//       let input = "glob is I";
 //       let data = new HashMap();
-//       data.set("grob","I");
+//       data.set("glob","I");
 //       let s = new CurrencyStore(data)
 //
-//       expect(s.getRomanNumeralFromFile("grob")).to.equal("I");
+//       expect(s.getRomanNumeralFromFile("glob")).to.equal("I");
 //     });
 //   });
 // });
@@ -42,12 +43,12 @@ describe("Given a store with data", () => {
 //
 //       store = new CurrencyStore(map);
 //   });
-//   describe("When input is: grob is I", () => {
+//   describe("When input is: glob is I", () => {
 //     it("should return I", function() {
-//       let input = "grob is I";
+//       let input = "glob is I";
 //       store.addMappingToHash(input);
 //
-//       expect(store.getRomanNumeralFromFile("grob")).to.equal("I");
+//       expect(store.getRomanNumeralFromFile("glob")).to.equal("I");
 //     });
 //   });
 //   describe("When input is: prok is V", () => {
