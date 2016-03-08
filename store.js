@@ -5,15 +5,7 @@ export default class CurrencyStore {
   addMappingToFile(userInput) {
     let alienWord = userInput.trim().split(" ")[0],
       romanNumeral = userInput.trim().split(" ")[2];
-    let oldFileContent = "";
-    let currency = alienWord + ":" + romanNumeral + ",";
-
-    if (!fs.existsSync(FILEPATH))
-      fs.writeFileSync(FILEPATH, currency);
-    if (fs.existsSync(FILEPATH))
-      oldFileContent = fs.readFileSync(FILEPATH);
-    if (oldFileContent && oldFileContent.indexOf(currency) === -1 && oldFileContent.indexOf(":" + romanNumeral + ",") === -1)
-      fs.writeFileSync(FILEPATH, oldFileContent + currency);
+    this.WriteKeyValuePairToFile(romanNumeral, alienWord, FILEPATH);
   }
   getRomanNumeralFromFile(alienWords) {
     if (!fs.existsSync(FILEPATH)) return;
@@ -21,8 +13,8 @@ export default class CurrencyStore {
     if (!oldFileContent) return;
     let pairs = oldFileContent.toString().trim().split(",");
     for (let pair of pairs) {
-      if (pair.trim().split(":")[0] === alienWords)
-        return pair.trim().split(":")[1];
+      if (pair.trim().split(":")[1] === alienWords)
+        return pair.trim().split(":")[0];
     }
   }
   GetExchangeRate(type) {
@@ -36,13 +28,16 @@ export default class CurrencyStore {
     }
   }
   SetExchangeRate(type, rate) {
+    this.WriteKeyValuePairToFile(type, rate, FILEPATH2);
+  }
+  WriteKeyValuePairToFile(key, value, filePath) {
+    let pair = key + ":" + value + ",";
     let oldFileContent = "";
-    let exchangeRate = type + ":" + rate + ",";
-    if (!fs.existsSync(FILEPATH2))
-      fs.writeFileSync(FILEPATH2, exchangeRate);
-    if (fs.existsSync(FILEPATH2))
-      oldFileContent = fs.readFileSync(FILEPATH2);
-    if (oldFileContent && oldFileContent.indexOf(exchangeRate) === -1 && oldFileContent.indexOf(type + ":") === -1)
-      fs.writeFileSync(FILEPATH2, oldFileContent + exchangeRate);
+    if (!fs.existsSync(filePath))
+      fs.writeFileSync(filePath, pair);
+    if (fs.existsSync(filePath))
+      oldFileContent = fs.readFileSync(filePath);
+    if (oldFileContent && oldFileContent.indexOf(pair) === -1 && oldFileContent.indexOf(key + ":") === -1)
+      fs.writeFileSync(filePath, oldFileContent + pair);
   }
 }

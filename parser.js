@@ -47,10 +47,8 @@ export default class Parser {
       let reply = currencyAndType + " is ";
       //get arabicCurrency
       let arabic = this.ConvertAlienUnitsToArabicUnits(everythingBeforeType);
-      console.log(arabic)
         //get exchangeRate
       let exchangeRate = this.store.GetExchangeRate(type);
-      console.log(exchangeRate)
       reply += arabic * exchangeRate;
       return reply + " Credits";
     }
