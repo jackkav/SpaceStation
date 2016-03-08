@@ -1,4 +1,6 @@
-import {_} from 'underscore'
+import {
+  _
+} from 'underscore'
 export default class Parser {
   constructor(options) {
     this.store = options.store;
@@ -10,6 +12,7 @@ export default class Parser {
 
     if (this.IsValidQuestion(userInput)) {
       let alienUnits = this.ParseQuestionUnits(userInput);
+      if (!this.AreUnitsKnown(alienUnits)) return "I have never heard of " + alienUnits;
       let reply = alienUnits;
       reply += " is ";
       reply += this.ConvertAlienUnitsToArabicUnits(alienUnits);
@@ -17,18 +20,29 @@ export default class Parser {
     }
 
     if (this.IsValidAssignment(userInput)) {
-      //add translation to temp kvp
       if (!this.calc.IsValidRomanNumeral(userInput)) {
         return "Numeral format is incorrect unable to parse";
       }
-      this.store.addMappingToHash(userInput);
+      this.store.addMappingToFile(userInput);
       return "accepted: " + userInput + " = " + this.calc.NumeralToNumber(userInput[userInput.length - 1]);
 
     }
     return "I have no idea what you are talking about";
   }
-  ConvertAlienUnitsToArabicUnits(alienUnits){
-    var numeral = this.store.getRomanNumerals(alienUnits);
+  AreUnitsKnown(units) {
+    let unitList = units.split(" ");
+    for (let unit of unitList) {
+      if (!this.store.getRomanNumeralFromFile(unit))
+        return false;
+    }
+    return true;
+  }
+  ConvertAlienUnitsToArabicUnits(alienUnits) {
+    let numeral = "";
+    for(let unit of alienUnits.split(" "))
+    {
+      numeral += this.store.getRomanNumeralFromFile(alienUnits);
+    }
     return this.calc.RomanToArabic(numeral);
   }
   ParseQuestionUnits(userInput) {
@@ -39,8 +53,6 @@ export default class Parser {
   IsValidQuestion(userInput) {
     let containsQuestionMark = userInput.indexOf("?") !== -1;
     let startsWithHowMuchIs = userInput.indexOf("how much is ") !== -1;
-
-    // let startsWithHowMuchIs = userInput.indexOf("how much is ") !== -1;
     return containsQuestionMark && startsWithHowMuchIs;
   }
   IsValidAssignment(userInput) {
@@ -50,4 +62,5 @@ export default class Parser {
     let lastPartIsNumeral = "IVXLCDM".indexOf(userInput.trim().split(" ")[2]) != -1;
     return containsIs && hasThreeParts && lastPartIsNumeral;
   }
+
 }
