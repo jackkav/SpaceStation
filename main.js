@@ -9,7 +9,7 @@ rl.setPrompt('Prompt> ');
 rl.prompt();
 
 rl.on('line', (line) => {
-  let x = new Parser({store:new Store(), calc: new Calc()}).Read(line);
+  let x = new Parser({store: new Store(), calc: new Calc()}).Read(line);
   console.log(x);
   rl.prompt();
 }).on('close', () => {

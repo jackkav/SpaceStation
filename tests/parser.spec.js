@@ -9,7 +9,7 @@ let store;
 chai.use(require("sinon-chai"));
 describe("Given user input", () => {
 
-  beforeEach(function() {
+  beforeEach(function () {
     // this.sinon = sinon.sandbox.create();
     store = new Store();
     parser = new Parser({
@@ -17,11 +17,11 @@ describe("Given user input", () => {
       calc: new Calc()
     });
   });
-  afterEach(function() {
+  afterEach(function () {
     // this.sinon.restore();
   });
   describe("When its empty", () => {
-    it("returns I have no idea what you are talking about", function() {
+    it("returns I have no idea what you are talking about", function () {
       expect(parser.Read("")).to.equal("I have no idea what you are talking about");
     });
   });
@@ -61,12 +61,12 @@ describe("Given user input", () => {
     });
   });
   describe("And some values have been assigned", () => {
-    beforeEach(function() {
+    beforeEach(function () {
 
     });
     describe("When its a question", () => {
       describe("And the question is how much is glob ?", () => {
-        it("should return glob is 1", function() {
+        it("should return glob is 1", function () {
           // let store = new Store();
           // let calc = new Calc();
           // parser = new Parser({
@@ -83,7 +83,7 @@ describe("Given user input", () => {
 
 
 describe("Given glob equals I", () => {
-  beforeEach(function() {
+  beforeEach(function () {
     // this.sinon = sinon.sandbox.create();
     store = new Store()
     parser = new Parser({
@@ -91,12 +91,12 @@ describe("Given glob equals I", () => {
       calc: new Calc()
     });
   });
-  afterEach(function() {
+  afterEach(function () {
     // this.sinon.restore();
   });
   describe("When converting one alien unit to one roman unit", () => {
     it("should return 1", () => {
-      sinon.stub(store, "getRomanNumeralFromFile").returns("I");
+      sinon.stub(store, "GetRomanUnit").returns("I");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob")).to.equal(1);
     });
 
@@ -109,7 +109,7 @@ describe("Given glob equals I", () => {
       //   store: store,
       //   calc: calc
       // });
-      sinon.stub(store, "getRomanNumeralFromFile").returns("I");
+      sinon.stub(store, "GetRomanUnit").returns("I");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob glob")).to.equal(2);
     });
     it("should return 6", () => {
@@ -119,7 +119,7 @@ describe("Given glob equals I", () => {
         store: store,
         calc: calc
       });
-      sinon.stub(store, "getRomanNumeralFromFile").onFirstCall().returns("V").onSecondCall().returns("I");
+      sinon.stub(store, "GetRomanUnit").onFirstCall().returns("V").onSecondCall().returns("I");
       expect(parser.ConvertAlienUnitsToArabicUnits("prok glob")).to.equal(6);
     });
     it("should return 4", () => {
@@ -129,17 +129,17 @@ describe("Given glob equals I", () => {
         store: store,
         calc: calc
       });
-      sinon.stub(store, "getRomanNumeralFromFile").onFirstCall().returns("I").onSecondCall().returns("V");
+      sinon.stub(store, "GetRomanUnit").onFirstCall().returns("I").onSecondCall().returns("V");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob prok")).to.equal(4);
     });
   });
 });
 describe("Given unknown units in question", () => {
-  beforeEach(function() {
+  beforeEach(function () {
     this.sinon = sinon.sandbox.create();
   });
 
-  afterEach(function() {
+  afterEach(function () {
     this.sinon.restore();
   });
   describe("When question is how much is hello", () => {
@@ -150,7 +150,7 @@ describe("Given unknown units in question", () => {
         store: store,
         calc: calc
       });
-      sinon.stub(store, "getRomanNumeralFromFile").returns("");
+      sinon.stub(store, "GetRomanUnit").returns("");
       expect(parser.Read("how much is hello?")).to.equal("I have never heard of hello");
     });
   });
@@ -164,7 +164,7 @@ describe("Given known units", () => {
         store: store,
         calc: calc
       });
-      sinon.stub(store, "getRomanNumeralFromFile").returns("X");
+      sinon.stub(store, "GetRomanUnit").returns("X");
       expect(parser.AreUnitsKnown("pish tegj glob glob?")).to.equal(true);
     });
   });

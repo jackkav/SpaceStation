@@ -1,20 +1,21 @@
-import CurrencyStore from "../store.js";
-import * as chai from "chai";
-import * as sinon from "sinon";
-const expect = chai.expect;
-chai.use(require("sinon-chai"));
-var HashMap = require("hashmap")
-var fs = require('fs');
-
-let store;
+//NOTE: don't want to unit test filesystem access the following were for debugging purposes
+//import CurrencyStore from "../store.js";
+//import * as chai from "chai";
+//import * as sinon from "sinon";
+//const expect = chai.expect;
+//chai.use(require("sinon-chai"));
+//var HashMap = require("hashmap")
+//var fs = require('fs');
+//
+//let store;
 // describe("Given a store with data", () => {
 //   it("should return I", function() {
 //     let s = new CurrencyStore()
-//     s.addMappingToFile("glob is I");
-//     s.addMappingToFile("prok is V");
-//     s.addMappingToFile("prok is V");
-//     s.addMappingToFile("bob is V");
-//     s.addMappingToFile("pish is X");
+//     s.SetCurrencyLookup("glob is I");
+//     s.SetCurrencyLookup("prok is V");
+//     s.SetCurrencyLookup("prok is V");
+//     s.SetCurrencyLookup("bob is V");
+//     s.SetCurrencyLookup("pish is X");
 //     var result = fs.readFileSync("/tmp/test");
 //     expect(result.toString()).to.equal("glob:I,prok:V,pish:X,");
 //   });

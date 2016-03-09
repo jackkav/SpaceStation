@@ -1,4 +1,3 @@
-import * as _ from "underscore"
 export default class Calc {
   RomanToArabic(numeral) {
     if (!this.IsValidRomanNumeral(numeral)) return 0;
@@ -12,6 +11,7 @@ export default class Calc {
     }
     return arabic;
   }
+
   NumeralToNumber(numeral) {
     const NUMERALS = {
       I: 1,
@@ -24,13 +24,15 @@ export default class Calc {
     };
     return NUMERALS[numeral] || 0;
   }
+
   IsValidRomanNumeral(numeral) {
+    //TODO: consider regex
     if (!numeral) return false;
-    if(numeral.indexOf("IIII")>-1)return false;
-    if(numeral.indexOf("CCCC")>-1)return false;
-    if(numeral.indexOf("MMMM")>-1)return false;
-    if(numeral.indexOf("LC")>-1)return false;
-    if(numeral.indexOf("DM")>-1)return false;
+    if (numeral.indexOf("IIII") > -1)return false;
+    if (numeral.indexOf("CCCC") > -1)return false;
+    if (numeral.indexOf("MMMM") > -1)return false;
+    if (numeral.indexOf("LC") > -1)return false;
+    if (numeral.indexOf("DM") > -1)return false;
     return true;
   }
 }

@@ -1,43 +1,51 @@
-const FILEPATH = "/tmp/test"
-const FILEPATH2 = "/tmp/test2"
+const PATHTOCURRENCYLOOKUP = "/tmp/lookup";
+const PATHTOEXCHANGERATES = "/tmp/exchange";
 let fs = require('fs-extra');
 export default class CurrencyStore {
-  addMappingToFile(userInput) {
-    let alienWord = userInput.trim().split(" ")[0],
-      romanNumeral = userInput.trim().split(" ")[2];
-    this.WriteKeyValuePairToFile(romanNumeral, alienWord, FILEPATH);
+  //TODO: overwrite existing record if keys match
+  SetCurrencyLookup(userInput) {
+    let alienUnit = userInput.trim().split(" ")[0],
+      romanUnit = userInput.trim().split(" ")[2];
+    this.WriteKeyValuePairToFile(romanUnit, alienUnit, PATHTOCURRENCYLOOKUP);
   }
-  getRomanNumeralFromFile(alienWords) {
-    if (!fs.existsSync(FILEPATH)) return;
-    let oldFileContent = fs.readFileSync(FILEPATH);
+
+  GetRomanUnit(alienUnit) {
+    if (!fs.existsSync(PATHTOCURRENCYLOOKUP)) return;
+    let oldFileContent = fs.readFileSync(PATHTOCURRENCYLOOKUP);
     if (!oldFileContent) return;
-    let pairs = oldFileContent.toString().trim().split(",");
-    for (let pair of pairs) {
-      if (pair.trim().split(":")[1] === alienWords)
+    let keyValuePairs = oldFileContent.toString().trim().split(",");
+    for (let pair of keyValuePairs) {
+      if (pair.trim().split(":")[1] === alienUnit)
         return pair.trim().split(":")[0];
     }
   }
-  GetExchangeRate(type) {
-    if (!fs.existsSync(FILEPATH2)) return;
-    let oldFileContent = fs.readFileSync(FILEPATH2);
+
+  SetMaterialTypeExchangeRate(type, rate) {
+    this.WriteKeyValuePairToFile(type, rate, PATHTOEXCHANGERATES);
+  }
+
+  GetMaterialTypeExchangeRate(materialType) {
+    if (!fs.existsSync(PATHTOEXCHANGERATES)) return;
+    let oldFileContent = fs.readFileSync(PATHTOEXCHANGERATES);
     if (!oldFileContent) return;
-    let pairs = oldFileContent.toString().trim().split(",");
-    for (let pair of pairs) {
-      if (pair.trim().split(":")[0] === type)
+    let keyValuePairs = oldFileContent.toString().trim().split(",");
+    for (let pair of keyValuePairs) {
+      if (pair.trim().split(":")[0] === materialType)
         return pair.trim().split(":")[1];
     }
   }
-  SetExchangeRate(type, rate) {
-    this.WriteKeyValuePairToFile(type, rate, FILEPATH2);
-  }
+
   WriteKeyValuePairToFile(key, value, filePath) {
     let pair = key + ":" + value + ",";
     let oldFileContent = "";
-    if (!fs.existsSync(filePath))
+    let fileExists = fs.existsSync(filePath);
+    if (!fileExists)
       fs.writeFileSync(filePath, pair);
-    if (fs.existsSync(filePath))
+    if (fileExists)
       oldFileContent = fs.readFileSync(filePath);
-    if (oldFileContent && oldFileContent.indexOf(pair) === -1 && oldFileContent.indexOf(key + ":") === -1)
+    let newPairNotFound = oldFileContent.indexOf(pair) === -1;
+    let newKeyNotFound = oldFileContent.indexOf(key + ":") === -1;
+    if (oldFileContent && newPairNotFound && newKeyNotFound)
       fs.writeFileSync(filePath, oldFileContent + pair);
   }
 }
