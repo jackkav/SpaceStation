@@ -1,4 +1,4 @@
-#Install
+Install
 npm install
 
 #Run
@@ -9,6 +9,3 @@ npm run test
 
 #Watch Test
 npm run watch-test
-
-#Coverage
-node_modules/.bin/nyc --require babel-core/register node_modules/.bin/mocha tests
