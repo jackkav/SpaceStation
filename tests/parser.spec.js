@@ -7,18 +7,14 @@ const expect = chai.expect;
 let parser;
 let store;
 chai.use(require("sinon-chai"));
+//TODO: stub file store set methods so tests changes don't persist in file i.e. glob is I, prok is V
 describe("Given user input", () => {
-
   beforeEach(function () {
-    // this.sinon = sinon.sandbox.create();
     store = new Store();
     parser = new Parser({
       store: store,
       calc: new Calc()
     });
-  });
-  afterEach(function () {
-    // this.sinon.restore();
   });
   describe("When its empty", () => {
     it("returns I have no idea what you are talking about", function () {
@@ -67,12 +63,6 @@ describe("Given user input", () => {
     describe("When its a question", () => {
       describe("And the question is how much is glob ?", () => {
         it("should return glob is 1", function () {
-          // let store = new Store();
-          // let calc = new Calc();
-          // parser = new Parser({
-          //   store: store,
-          //   calc: calc
-          // });
           sinon.stub(parser, "ConvertAlienUnitsToArabicUnits").returns("1");
           expect(parser.Read("how much is glob ?")).to.equal("glob is 1");
         });
@@ -84,15 +74,11 @@ describe("Given user input", () => {
 
 describe("Given glob equals I", () => {
   beforeEach(function () {
-    // this.sinon = sinon.sandbox.create();
     store = new Store()
     parser = new Parser({
       store: store,
       calc: new Calc()
     });
-  });
-  afterEach(function () {
-    // this.sinon.restore();
   });
   describe("When converting one alien unit to one roman unit", () => {
     it("should return 1", () => {
@@ -103,12 +89,6 @@ describe("Given glob equals I", () => {
   });
   describe("When converting two alien units to two roman units", () => {
     it("should return 2", () => {
-      // let store = new Store();
-      // let calc = new Calc();
-      // parser = new Parser({
-      //   store: store,
-      //   calc: calc
-      // });
       sinon.stub(store, "GetRomanUnit").returns("I");
       expect(parser.ConvertAlienUnitsToArabicUnits("glob glob")).to.equal(2);
     });
@@ -135,13 +115,6 @@ describe("Given glob equals I", () => {
   });
 });
 describe("Given unknown units in question", () => {
-  beforeEach(function () {
-    this.sinon = sinon.sandbox.create();
-  });
-
-  afterEach(function () {
-    this.sinon.restore();
-  });
   describe("When question is how much is hello", () => {
     it("returns I have never heard of hello", () => {
       let store = new Store();
@@ -169,8 +142,9 @@ describe("Given known units", () => {
     });
   });
 });
-
-describe("Given known units", () => {
+//NOTE: test used to help build parser
+//TODO: refactor this test to only assert the question logic
+//describe("Given known units", () => {
   // sinon.stub(parser, "ConvertAlienUnitsToArabicUnits")
   // .onFirstCall().returns(2)
   // .onSecondCall().returns(3)
@@ -190,4 +164,4 @@ describe("Given known units", () => {
   //     expect(parser.Read("how many Credits is glob prok Silver ?")).to.equal("glob prok Silver is 68 Credits");
   //   });
   // });
-});
+//});

@@ -33,6 +33,7 @@ export default class Parser {
       reply += this.ConvertAlienUnitsToArabicUnits(alienUnits);
       return reply;
     }
+    
     if (this.IsValidCreditQuestion(userInput)) {
       let currencyAndType = userInput.split(" is ")[1].split("?")[0].trim();
       let words = currencyAndType.split(" ");

@@ -1,3 +1,6 @@
+Install
+npm install
+
 #Run
 ./node_modules/.bin/babel-node main.js
 
